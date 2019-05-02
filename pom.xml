@@ -41,49 +41,26 @@
         </dependency>
     </dependencies>
 
+    　　　　<!--配置spring boot打包(可运行jar包)-->
+    　　
     <build>
-        <finalName>${project.name}</finalName>
         <plugins>
-            <!-- 打包时过滤测试 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <skipTests>true</skipTests>
-                </configuration>
-            </plugin>
-            <!-- 配置 maven 编译插件 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>${jdk.version}</source><!-- 源代码使用的开发版本 -->
-                    <target>${jdk.version}</target><!-- 需要生成的目标class文件的编译版本 -->
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                    <compilerArguments>
-                        <verbose/>
-                        <bootclasspath>${java.home}/lib/rt.jar;${java.home}/lib/jce.jar</bootclasspath>
-                    </compilerArguments>
-                </configuration>
-            </plugin>
-            <!-- boot项目打包发布处理插件 -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <fork>true</fork>
-                </configuration>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <mainClass>com.example.demo.SpringDemoApplication</mainClass>
+                        </configuration>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
-
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>false</filtering> <!-- 是否使用过滤 -->
-            </resource>
-        </resources>
     </build>
-
     <!-- 使用aliyun镜像 -->
     <repositories>
         <repository>
