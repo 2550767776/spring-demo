@@ -41,8 +41,6 @@
         </dependency>
     </dependencies>
 
-    　　　　<!--配置spring boot打包(可运行jar包)-->
-    　　
     <build>
         <plugins>
             <plugin>
